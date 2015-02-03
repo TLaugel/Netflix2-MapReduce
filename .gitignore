@@ -1,2 +1,10 @@
 password
 data/*
+velib/*
+.ipynb_checkpoints/*
+json_velib_python.pig
+jython.py
+jython.temp.py
+td3a_correction_session7az.ipynb
+*.*~
+password~
