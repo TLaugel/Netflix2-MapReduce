@@ -1,5 +1,5 @@
 
-allData = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Train-$dateMin.csv' USING PigStorage(',') AS (movie:int,user:int,rating:int,date:chararray ) ;
+allData = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/smallExtract.csv' USING PigStorage(',') AS (movie:int,user:int,rating:int,date:chararray ) ;
 --smallExtract, smallEffects
 --allNetflixDataClean, allEffects
 
@@ -15,4 +15,6 @@ tablefinal = FOREACH table2 GENERATE movie, user, (rating - rbar_user) as center
 
 tablefinal = ORDER tablefinal BY user ;
 
-STORE tablefinal INTO '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Effects-$dateMin.csv' USING PigStorage(',') ;
+DUMP tablefinal ; 
+
+STORE tablefinal INTO '$CONTAINER/$PSEUDO/DonnotLaugel/smallEffects.csv' USING PigStorage(',') ;
