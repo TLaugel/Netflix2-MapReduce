@@ -15,7 +15,7 @@ coratings1 = FOREACH pairs_unique GENERATE user, movie, movie2, centered_rating,
 aggregate_pairs = GROUP coratings1 BY (movie, movie2) ;
 coratings2 = FOREACH aggregate_pairs GENERATE group, COUNT(coratings1.movie) AS num, SUM(coratings1.centered_rating) AS ratingSum, SUM(coratings1.centered_rating2) AS rating2Sum, SUM(coratings1.ratingSq) AS ratingSqSum, SUM(coratings1.rating2Sq) AS rating2SqSum, SUM(coratings1.dotProduct) AS dotProductSum ;
 
-coratings2 = FILTER coratings2 BY num >= 2;
+coratings2 = FILTER coratings2 BY num >= 10;
 
 recommendations = FOREACH coratings2 GENERATE group.movie, group.movie2, (double)(num * dotProductSum - ratingSum * rating2Sum) / ( SQRT((double)(num * ratingSqSum - ratingSum * ratingSum)) * SQRT((double)(num * rating2SqSum - rating2Sum * rating2Sum)) ) AS correlation ;
 
