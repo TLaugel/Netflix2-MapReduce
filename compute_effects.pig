@@ -1,18 +1,18 @@
 
-allData = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Train-$dateMin.csv' USING PigStorage(',') AS (movie:int,user:int,rating:int,date:chararray ) ;
---smallExtract, smallEffects
---allNetflixDataClean, allEffects
+A = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Train-$dateMin.csv' USING PigStorage(',') AS (movie:int,user:int,rating:int,date:chararray);
 
-moviegroup = GROUP allData BY movie ;
-movie_effects = FOREACH moviegroup GENERATE group AS movieid, SUM(allData.rating)/(float)COUNT(allData.rating) AS avg_movie_rating ;
-table = JOIN allData BY movie, movie_effects BY movieid ;
+MA = GROUP A BY movie;
+MB = FOREACH MA GENERATE group AS movieid,
+                        SUM($1.rating)/(float)COUNT($1.rating) AS avg_movie_rating:float;
+AMA = JOIN A BY movie, MB BY movieid;
 
-usergroup = GROUP table BY user ;
-user_effects = FOREACH usergroup GENERATE group AS userid, (SUM(table.rating) - SUM(table.avg_movie_rating)) AS rbar_user ;
-table2 = JOIN table BY user, user_effects by userid ;
+UA = GROUP AMA BY user;
+UB = FOREACH UA GENERATE group AS userid,
+                        (SUM($1.rating) - SUM($1.avg_movie_rating)) AS rbar_user:float;
+AMUA = JOIN AMA BY user, UB by userid;
 
-tablefinal = FOREACH table2 GENERATE movie, user, (rating - rbar_user) as centered_rating ;
+OUT = FOREACH AMUA GENERATE movie, user, (rating - rbar_user) as centered_rating:float;
 
-tablefinal = ORDER tablefinal BY user ;
+OUT2 = ORDER OUT BY user ;
 
-STORE tablefinal INTO '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Effects-$dateMin.csv' USING PigStorage(',') ;
+STORE OUT2 INTO '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Effects-$dateMin.csv' USING PigStorage(',');
