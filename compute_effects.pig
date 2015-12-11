@@ -12,7 +12,6 @@ UB = FOREACH UA GENERATE group AS userid,
 AMUA = JOIN AMA BY user, UB by userid;
 
 OUT = FOREACH AMUA GENERATE movie, user, (rating - rbar_user) as centered_rating:float;
-
 OUT2 = ORDER OUT BY user ;
 
 STORE OUT2 INTO '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Effects-$dateMin.csv' USING PigStorage(',');
