@@ -38,4 +38,4 @@ H = FOREACH G GENERATE FLATTEN(group) AS (user, movietest, ratingtest),
                     FLATTEN(TOP(1, 4, $1)) AS (prediction, votes);
 
 
-STORE D INTO '$CONTAINER/$PSEUDO/DonnotLaugel/smallPred.csv' USING PigStorage(',') ;
+STORE H INTO '$CONTAINER/$PSEUDO/DonnotLaugel/smallPred.csv' USING PigStorage(',') ;
