@@ -20,8 +20,8 @@ CB = FOREACH CA GENERATE FLATTEN(group) AS (movie, movie2),
 
 CC = FILTER CB BY count >= 10;
 
-RECO = FOREACH CC GENERATE movie,
+COVAR = FOREACH CC GENERATE movie,
                             move2,
                             (double)(count * dotProductSum - ratingSum * rating2Sum) / ( SQRT((double)(num * ratingSqSum - ratingSum * ratingSum)) * SQRT((double)(num * rating2SqSum - rating2Sum * rating2Sum)) ) AS correlation:float;
 
-STORE ordered INTO '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Reco-$dateMin.csv' USING PigStorage(',') ;
+STORE COVAR INTO '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Reco-$dateMin.csv' USING PigStorage(',') ;
