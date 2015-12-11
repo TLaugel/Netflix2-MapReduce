@@ -12,14 +12,9 @@ Files description:
 
 Main Files:
 - Donnees_Massives.pdf: project report (French)
+- compute_covar_matrix.pig: PIG script for computation of the movie-movie covariance matrix
 - compute_effects.pig: PIG script for the computation of the movie and user effects
-- compute_pred_small.pig: PIG script for the computation of the movie/movie covariance matrix
-- compute_reco.pig: PIG script for computation of the final rating prediction
-- compute_reco.ipynb: final code (python connexion to the server + PIG scripts)
+- compute_pred.pig: PIG script for the computation of the final rating predictions
 
-Other files:
-- uploadData.ipynb: upload data on the server
-- convertDate.pig: solving a date format problem
-- create_histogram_by_date.pig: PIG script for the temporal density of the data, to split between train and test sets
-- create_train_test.pig: PIG script for the train-test splitting
-- splitData.ipynb: final code for data splitting (python connexion + PIG scripts)
+Other:
+- create_train_test.pig
