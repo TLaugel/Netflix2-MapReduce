@@ -1,4 +1,4 @@
-# Using Map Reduce for recommendations
+# Using Map Reduce (Pig) for recommendations
 This project is a following of the one that can be found in the repository: http://github.com/TLaugel/Privacy-for-Netflix-contest
 
 The goal of this project is to use the Map Reduce technology to tackle the dimensionnality issue raised by our first attempt at solving the Netflix recommendations problem. We used PIG to compute our recommendations on a Microsoft Azure cluster, and Python (IPython Notebook) to communicate with this machine. 
