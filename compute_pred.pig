@@ -1,8 +1,8 @@
 DEFINE Coalesce datafu.pig.util.Coalesce('lazy');
 
-TEST = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/smallExtract_test.csv' USING PigStorage(',') AS (movietest:int,usertest:int,ratingtest:float,date:chararray );
-TRAIN = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/smallExtract.csv' USING PigStorage(',') AS (movietrain:int,usertrain:int,ratingtrain:float,date:chararray);
-COVAR = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/smallReco.csv' USING PigStorage(',') AS (movie:int,movie2:int,correlation:float);
+TEST = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/smallExtract_test/p*' USING PigStorage(',') AS (movietest:int,usertest:int,ratingtest:float,date:chararray );
+TRAIN = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/smallExtract/p*' USING PigStorage(',') AS (movietrain:int,usertrain:int,ratingtrain:float,date:chararray);
+COVAR = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/smallReco/p*' USING PigStorage(',') AS (movie:int,movie2:int,correlation:float);
 
 -- // Script does a knn to predict a rating
 %declare NB_NEIGHBORS 3
@@ -38,4 +38,4 @@ H = FOREACH G GENERATE FLATTEN(group) AS (user, movietest, ratingtest),
                     FLATTEN(TOP(1, 4, $1)) AS (prediction, votes);
 
 
-STORE H INTO '$CONTAINER/$PSEUDO/DonnotLaugel/smallPred.csv' USING PigStorage(',') ;
+STORE H INTO '$CONTAINER/$PSEUDO/DonnotLaugel/pred' USING PigStorage(',') ;
