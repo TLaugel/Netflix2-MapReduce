@@ -1,11 +1,9 @@
 # Using Map Reduce (Pig) for recommendations
-This project is a following of the one that can be found in the repository: http://github.com/TLaugel/Privacy-for-Netflix-contest
+This project is a following of the one that can be found in the repository: http://github.com/thibaultlaugel/netflix-privacy
 
-The goal of this project is to use the Map Reduce technology to tackle the dimensionnality issue raised by our first attempt at solving the Netflix recommendations problem. We used PIG to compute our recommendations on a Microsoft Azure cluster, and Python (IPython Notebook) to communicate with this machine. 
+The goal of this project is to use the Map Reduce technology to tackle the dimensionnality issue raised by our first attempt at solving the Netflix recommendations problem. We used PIG to compute our recommendations on a Microsoft Azure cluster.
 
 Despite based on the same data, this project does not focus like the first one on ensuring privacy of the users, but rather on using all data available to find the best movie recommendations. Thus, the computation of the movie/user effects is simplified. Moreover, we also decided not to include the SVD decomposition to focus on the k-NN algorithm.
-
-This project was made in collaboration with Benjamin DONNOT
 
 _________________________
 Files description:
