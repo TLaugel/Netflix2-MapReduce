@@ -1,5 +1,5 @@
 
-A = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Train-$dateMin.csv' USING PigStorage(',') AS (movie:int,user:int,rating:int,date:chararray);
+A = LOAD '$CONTAINER/$PSEUDO/DonnotLaugel/NetflixData_Train-$dateMin/p*' USING PigStorage(',') AS (movie:int,user:int,rating:int,date:chararray);
 
 MA = GROUP A BY movie;
 MB = FOREACH MA GENERATE group AS movieid,
